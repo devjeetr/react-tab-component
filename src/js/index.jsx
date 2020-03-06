@@ -2,14 +2,34 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Tab from './Tab';
 import Tabs from './Tabs';
+import TabHeader from './TabHeader';
+import TabContent from './TabContent';
 
+/**
+ * 
+ * 
+ * Example Usage scenarios:
+ * 
+ * <Tabs>
+ *   <Tab>
+ *      <Header><Header>
+ *      <Content>ssads<Content> 
+ *   </Tab>
+ *   <Tab>
+ *      <Header></Header>
+ *      <Content></Content>
+ *   </Tab>
+ * <Tabs>
+ */
 const Sample = () => (
     <Tabs>
-        <Tab name="tab 1">
-            <div>Im tab 1</div>
+        <Tab>
+            <TabHeader>I'm a header</TabHeader>
+            <TabContent>And im the contents</TabContent>
         </Tab>
-        <Tab name="tab-2">
-            <div>I'm tab 2</div>
+        <Tab >
+            <TabHeader>I'm a header</TabHeader>
+            <TabContent>And im the contents</TabContent>
         </Tab>
     </Tabs>
 )
