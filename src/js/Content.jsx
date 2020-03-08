@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TabContent = ({children}) => {
+const Content = ({children}) => {
     
     return (
     <div className="react-tab-content">
@@ -9,4 +9,4 @@ const TabContent = ({children}) => {
 };
 
 
-export default TabContent;
+export default Content;

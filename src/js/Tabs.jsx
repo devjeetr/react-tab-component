@@ -1,56 +1,72 @@
 // @ts-check
-import React from "react";
+import React, { useState } from "react";
+
+import { extractHeaderAndContent } from "./helper";
 import TabPanel from "./TabPanel";
-import Tab from "./Tab";
-import TabHeader from "./TabHeader";
-import TabContent from "./TabContent";
+import generateId from "./id_generator";
 
 /**
- * Given the children of a Tabs component, goes through
- * every Tab and returns two arrays, first containing
- * all TabHeaders and second containing all TabContents
- * @param {React.ReactElement} tabs Child components
- * @return {[Array, Array]} returns the headers and the contents
+ *
+ * @param {React.ComponentType<any>[]} groupTypes
+ * @returns {Map}
  */
-const extractHeaderAndContent = tabs => {
-  const headers = [];
-  const contents = [];
+const createHeaderIdMapping = headers => {
+  const indexMapping = new Map();
 
-  React.Children.forEach(tabs, tab => {
-    // @ts-ignore
-    if (tab.type.name !== Tab.name) {
-      throw new Error("react-tab-component: Non Tab children provided");
-    }
-    React.Children.forEach(tab.props.children, child => {
-      if (child.type.name === TabHeader.name) {
-        headers.push(child);
-      }
-      if (child.type.name === TabContent.name) {
-        contents.push(child);
-      }
-    });
+  headers.forEach((_, index) => {
+    indexMapping.set(index, generateId);
   });
 
-  // make sure we have as many headers as we
-  // have content panels
-  if (headers.length !== contents.length) {
-    throw new Error(
-      "react-tab-component: number of headers and content panels not equal"
-    );
-  }
+  return indexMapping;
+};
 
-  return [headers, contents];
+const getActiveTab = children => {
+  let found = false;
+  let activeTab = -1;
+
+  let i = 0;
+  React.Children.forEach(children, child => {
+    if (child.props.active) {
+      if (found) {
+        throw new Error("More than one tab set as active");
+      }
+
+      activeTab = i;
+      found = true;
+    }
+    i++;
+  });
+
+  return activeTab;
+};
+
+const ControlledTabs = ({ headers, contents, activeTab }) => {
+  return (
+    <div className="react-tab-component">
+      <TabPanel>{headers}</TabPanel>
+      {contents[activeTab]}
+    </div>
+  );
 };
 
 const Tabs = ({ children }) => {
+  const activeTab = getActiveTab(children);
+    
   const [headers, contents] = extractHeaderAndContent(children);
-
+  const headerIdMapping = createHeaderIdMapping(headers);
+  
+  const headersWithDecoratedProps = headers.map((header, i) =>
+    React.cloneElement(header, {
+      id: headerIdMapping.get(i)
+    })
+  );
 
   return (
-    <div className="react-tab-component">
-      {/* <TabPanel></TabPanel> */}
-      {children}
-    </div>
+    <ControlledTabs
+      headers={headersWithDecoratedProps}
+      contents={contents}
+      activeTab={activeTab}
+    />
   );
 };
 

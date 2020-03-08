@@ -1,9 +1,10 @@
 import React from 'react';
 
-const TabPanel = ({tabs, onChange}) => {
+const TabPanel = ({children}) => {
     
-    return (<div>
-
+    return (
+    <div>
+        {children}
     </div>)
 };
 
