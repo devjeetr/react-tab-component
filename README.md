@@ -27,7 +27,7 @@ VITALSE.
 
 ## Controlled Mode (User controlled active tab):
 
-`
+```
     import RTC from 'react-tab-component';
 
     const App = () => (
@@ -44,11 +44,11 @@ VITALSE.
 
         </RTC.Tabs>
     )
-`
+```
 
 ## Controlled Mode:
 
-`
+```
     import RTC from 'react-tab-component';
 
     const App = () => (
@@ -65,11 +65,11 @@ VITALSE.
 
         </RTC.Tabs>
     )
-`
+```
 
 ## Custom Content Area
 
-`
+```
     import RTC from 'react-tab-component';
 
     const App = () => (
@@ -87,4 +87,4 @@ VITALSE.
             <RTC.ContentArea /> // this is where the active tab will be rendered
         </RTC.Tabs>
     )
-`
+```
