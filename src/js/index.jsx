@@ -63,6 +63,7 @@ const Sample = () => {
             </React.Fragment>
           ))}
         </Tabs>
+        <ContentArea />
       </Tabbed>
     </div>
   );

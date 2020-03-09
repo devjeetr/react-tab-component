@@ -3,7 +3,8 @@ import { TAB_PANEL_ROOT_CLASS } from "../common/class_and_id_names";
 
 const TabPanel = ({ tabs }) => {
   return (
-    <div className={TAB_PANEL_ROOT_CLASS}>
+    <div className={TAB_PANEL_ROOT_CLASS}
+         role="tablist">
       {tabs.map((tab, i) => (
         <React.Fragment key={i}> {tab} </React.Fragment>
       ))}

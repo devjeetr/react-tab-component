@@ -1,31 +1,28 @@
-import React, { useState } from 'react';
-import TabPanel from './TabPanel';
-import TabContainer from './TabContainer';
-import TabContainerPresentation from './TabContainerPresentation';
-
-
+import React, { useState } from "react";
+import TabContainerPresentation from "./TabContainerPresentation";
 
 const ManagedTabs = ({
   tabs,
   contents,
   beforeContentArea,
-  afterContentArea,
+  afterContentArea
 }) => {
-    const [activeTab, setActiveTab] = useState(0);
-    const tabsWithEventHandlers = tabs.map((header, i) => 
-        <div onClick={() => setActiveTab(i)}>
-            {header.props.children}
-        </div>
-    );
+  const [activeTab, setActiveTab] = useState(0);
+  const tabsWithEventHandlers = tabs.map((header, i) => (
+    <div onClick={() => setActiveTab(i)} role="tab" tabIndex="-1">
+      {header.props.children}
+    </div>
+  ));
 
-
-    return <TabContainerPresentation 
-        tabs={tabsWithEventHandlers}
-        contents={contents}
-        beforeContentArea={beforeContentArea}
-        afterContentArea={afterContentArea}
-        activeTab={activeTab}
+  return (
+    <TabContainerPresentation
+      tabs={tabsWithEventHandlers}
+      contents={contents}
+      beforeContentArea={beforeContentArea}
+      afterContentArea={afterContentArea}
+      activeTab={activeTab}
     />
-}
+  );
+};
 
 export default ManagedTabs;
