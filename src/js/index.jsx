@@ -54,7 +54,7 @@ const Sample = () => {
                 <Tab active={i === activeTab}
                 >
                     <Name>
-                        <div onClick={() => handleClick(i)}>
+                        <div onClick={() => handleClick(i)} onKeyDown={() => {handleClick(i)}}>
                             {header}
                         </div>
                     </Name>
